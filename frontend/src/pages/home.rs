@@ -3,7 +3,6 @@
 //! Strategy: fact-dense opening paragraph, Q&A sections, entity-rich headings.
 
 use dioxus::prelude::*;
-use dioxus_router::prelude::*;
 use crate::{
     Route,
     seo::{PageSeo, home_seo},

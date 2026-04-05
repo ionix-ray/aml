@@ -29,7 +29,7 @@ mod tests {
     fn test_landing_page_has_animation_and_grid() {
         let mut vdom = VirtualDom::new(mock_home_component);
         vdom.rebuild_in_place();
-        let rendered = dioxus_ssr::render(&vdom);
+        let rendered = dioxus::ssr::render(&vdom);
 
         // Assert Background Grid from AI Revamp reference
         assert!(rendered.contains("grid-bg"), "Landing page should have a futuristic grid background");
@@ -43,7 +43,7 @@ mod tests {
     fn test_landing_page_has_ai_seo_elements() {
         let mut vdom = VirtualDom::new(mock_home_component);
         vdom.rebuild_in_place();
-        let rendered = dioxus_ssr::render(&vdom);
+        let rendered = dioxus::ssr::render(&vdom);
 
         // Assert Semantic AI SEO elements
         assert!(rendered.contains("dl"), "Must use descriptive lists for AEO factual representation");

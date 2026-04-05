@@ -1,10 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --color-carbon-blue-60: #0f62fe;
+  --color-carbon-blue-70: #0043ce;
+  --color-carbon-gray-100: #161616;
+  --color-carbon-gray-90: #262626;
+  --color-carbon-gray-80: #393939;
+  --color-carbon-gray-10: #f4f4f4;
+  --color-ocean-blue: #001d6c;
+  --color-marine-teal: #005d5d;
+  --color-grid-line: rgba(15, 98, 254, 0.1);
+  --animate-float: floating 3s ease-in-out infinite;
+  --animate-shrimp-pop: shrimpPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  --animate-spin-reverse: spin-reverse 25s linear infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes shrimpPop {
+  0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
 
 @layer base {
   body {
-    /* Carbon Default: white background, gray-100 text */
     @apply bg-white text-carbon-gray-100 font-sans antialiased;
   }
 }
@@ -13,7 +40,7 @@
   /* Futuristic Grid Backgrounds */
   .grid-bg {
     position: relative;
-    background: #000; /* Dark space background */
+    background: #000;
     overflow: hidden;
   }
   .grid-bg::after {
@@ -21,9 +48,9 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(to right, theme('colors.grid-line') 1px, transparent 1px),
-      linear-gradient(to bottom, theme('colors.grid-line') 1px, transparent 1px),
-      radial-gradient(circle, theme('colors.grid-line') 2px, transparent 2px);
+      linear-gradient(to right, rgba(15, 98, 254, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 98, 254, 0.1) 1px, transparent 1px),
+      radial-gradient(circle, rgba(15, 98, 254, 0.1) 2px, transparent 2px);
     background-size: 60px 100%, 100% 60px, 60px 60px;
     background-position: 0 0, 0 0, 0 0;
     animation: flow 20s linear infinite;
@@ -33,9 +60,9 @@
   @keyframes flow {
     to { background-position: 60px 0, 0 60px, 60px 60px; }
   }
-  
+
   .glass-card {
-    background: rgba(22, 22, 22, 0.65); /* Carbon dark transparent */
+    background: rgba(22, 22, 22, 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -43,21 +70,20 @@
     @apply rounded-xl;
   }
 
-  /* Layout & Nav (Carbon styling) */
+  /* Layout & Nav */
   .site-header { @apply sticky top-0 z-50 bg-white border-b border-gray-200; }
   .nav-container { @apply flex items-center justify-between px-6 py-4 max-w-[1584px] mx-auto; }
   .nav-logo { @apply flex items-center gap-2; }
   .nav-links { @apply hidden md:flex items-center gap-6 text-sm font-normal text-carbon-gray-80; }
   .nav-link { @apply hover:text-carbon-blue-60 transition-colors; }
-  /* Carbon Primary Button */
   .nav-cta, .mobile-cta { @apply inline-flex items-center px-4 py-3 bg-carbon-blue-60 text-white text-sm font-normal hover:bg-carbon-blue-70 transition-all rounded-none; }
-  
+
   .mobile-nav { @apply hidden; }
   .mobile-nav.open { @apply block bg-white px-6 pb-6 shadow-md w-full absolute top-[75px] left-0 border-b border-gray-200; }
   .mobile-nav ul { @apply flex flex-col gap-4 py-4; }
   .mobile-nav a { @apply block text-sm font-normal text-carbon-gray-80; }
-  
-  /* Hero Section (Carbon Expressive Theme - Dark High Contrast) */
+
+  /* Hero */
   .hero { @apply relative bg-carbon-gray-100 text-white py-32 px-6 overflow-hidden; }
   .hero-content { @apply relative z-10 max-w-[1584px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center; }
   .hero-badge { @apply inline-flex items-center px-2 py-1 text-xs font-mono uppercase bg-carbon-gray-80 text-white mb-6 border border-carbon-gray-80; }
@@ -68,40 +94,41 @@
   .hero-actions { @apply flex flex-col sm:flex-row gap-4 mt-10; }
   .hero-certs { @apply flex flex-wrap gap-4 text-xs font-mono text-gray-400 mt-16 pt-8 border-t border-carbon-gray-80; }
   .cert-item { @apply flex items-center gap-2; }
-  
-  /* Standard Carbon Buttons */
+
+  /* Buttons */
   .btn { @apply inline-flex items-center justify-center px-4 py-3 text-sm font-normal transition-colors rounded-none outline-none focus:ring-2 focus:ring-offset-2 focus:ring-carbon-blue-60 cursor-pointer; }
   .btn-primary { @apply bg-carbon-blue-60 text-white hover:bg-carbon-blue-70; }
   .btn-ghost { @apply bg-transparent text-white border border-transparent hover:bg-carbon-gray-80; }
   .btn-outline { @apply border border-carbon-blue-60 text-carbon-blue-60 hover:bg-carbon-blue-60 hover:text-white bg-transparent; }
   .btn-lg { @apply px-6 py-4 text-base; }
-  
-  /* Stats Section (Carbon Layout) */
+
+  /* Stats */
   .stats-section { @apply py-16 bg-carbon-gray-10 border-b border-gray-200; }
   .stats-grid { @apply max-w-[1584px] mx-auto px-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8; }
   .stat-item { @apply flex flex-col border-l-2 border-carbon-blue-60 pl-4 py-1; }
   .stat-label { @apply text-xs font-mono text-carbon-gray-80 uppercase mb-2; }
   .stat-value { @apply text-3xl font-light text-carbon-gray-100; }
   .stat-desc { @apply text-xs text-carbon-gray-80 mt-1; }
-  
+
   /* Section Headers */
   .section-header { @apply max-w-[1584px] mx-auto mb-12; }
   .section-title { @apply text-3xl md:text-5xl font-light text-carbon-gray-100 tracking-tight; }
   .section-subtitle { @apply text-lg text-carbon-gray-80 mt-4 leading-relaxed max-w-3xl; }
-  
-  /* Products (Carbon Cards) */
+
+  /* Products */
   .products-section { @apply py-24 bg-white px-6 border-t border-gray-200; }
   .products-grid { @apply max-w-[1584px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6; }
-  .product-card { @apply bg-carbon-gray-10 p-6 border border-gray-200 hover:shadow-lg transition-shadow relative group rounded-none; }
+  .product-card { @apply bg-carbon-gray-10 p-6 border border-gray-200 hover:shadow-lg transition-shadow relative rounded-none; }
   .product-card-body { @apply flex flex-col gap-3 mt-4; }
   .product-card-name { @apply text-2xl font-normal text-carbon-gray-100; }
   .product-card-desc { @apply text-carbon-gray-80 text-sm; }
   .product-card-certs { @apply flex flex-wrap gap-2 mt-2; }
   .product-card-certs span { @apply text-xs font-mono bg-white border border-gray-300 text-carbon-gray-80 px-2 py-1; }
-  .product-card-link { @apply mt-4 text-carbon-blue-60 font-medium group-hover:underline inline-flex items-center gap-2; }
+  .product-card-link { @apply mt-4 text-carbon-blue-60 font-medium inline-flex items-center gap-2; }
+  .product-card:hover .product-card-link { text-decoration: underline; }
   .product-card-tag { @apply absolute top-6 right-6 bg-carbon-gray-100 text-white text-xs font-mono px-2 py-1; }
-  
-  /* Inner Pages (About, Contact, Products) */
+
+  /* Inner Pages */
   .page-hero { @apply bg-carbon-gray-100 text-white py-24 px-6 border-b-8 border-carbon-blue-60; }
   .page-hero-content { @apply max-w-[1584px] mx-auto flex flex-col gap-4; }
   .breadcrumb { @apply text-gray-400 text-sm font-mono mb-6; }
@@ -110,12 +137,16 @@
   .breadcrumb li:last-child::after { content: ""; }
   .page-title { @apply text-4xl md:text-6xl font-light tracking-tight; }
   .page-subtitle { @apply text-xl text-gray-300 max-w-3xl font-light; }
-  
+
   .about-overview { @apply max-w-[1584px] mx-auto py-24 px-6 grid grid-cols-1 lg:grid-cols-2 gap-16; }
-  .prose-block { @apply prose prose-lg prose-gray text-carbon-gray-80; }
+  .prose-block {
+    @apply text-lg text-carbon-gray-80;
+    line-height: 1.75;
+  }
   .prose-block h2 { @apply text-3xl font-light text-carbon-gray-100 mb-6; }
-  
-  /* Tables (Carbon DataTable styling) */
+  .prose-block p { margin-bottom: 1.25em; }
+
+  /* Tables */
   .facts-table-wrapper { @apply bg-white border border-gray-200 p-0; }
   .facts-table-wrapper h3 { @apply text-xl font-normal text-carbon-gray-100 p-4 border-b border-gray-200 bg-carbon-gray-10; }
   .facts-table { @apply w-full text-left text-sm text-carbon-gray-80 border-collapse; }
@@ -125,37 +156,37 @@
   .facts-table tr:hover td { @apply bg-carbon-gray-10; }
   .facts-table tr:last-child th, .facts-table tr:last-child td { @apply border-0; }
 
-  /* Timelines (Carbon structured) */
+  /* Timelines */
   .timeline-section { @apply py-24 bg-carbon-gray-10 px-6; }
   .timeline { @apply max-w-[1584px] mx-auto border-l border-gray-300 ml-6 pl-8 space-y-16 relative; }
   .timeline-year { @apply absolute -left-[18px] top-0 bg-carbon-blue-60 text-white font-mono px-2 py-0.5 text-xs; }
   .timeline-item { @apply relative; }
   .timeline-content h3 { @apply text-2xl font-normal text-carbon-gray-100 mb-2; }
   .timeline-content p { @apply text-carbon-gray-80 text-base; }
-  
+
   .facility-section { @apply py-24 px-6 bg-white; }
   .facility-grid { @apply max-w-[1584px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 border border-gray-200 mt-12; }
   .facility-item { @apply bg-white p-6 transition-colors hover:bg-carbon-gray-10; }
   .facility-item dt { @apply font-medium text-carbon-gray-100 mb-2 text-lg; }
   .facility-item dd { @apply text-carbon-gray-80 text-sm; }
-  
-  /* Misc layout */
+
+  /* Misc */
   .why-section { @apply py-24 px-6 bg-white; }
   .why-grid { @apply max-w-[1584px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12; }
   .why-item { @apply flex flex-col gap-3 p-6 bg-carbon-gray-10 border border-gray-200; }
   .why-title { @apply text-xl font-medium text-carbon-gray-100; }
   .why-desc { @apply text-carbon-gray-80 text-sm; }
-  
+
   .markets-section { @apply py-24 px-6 bg-carbon-gray-100 text-white; }
   .markets-list { @apply max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 text-base font-light text-gray-300; }
   .markets-list li { @apply py-4 border-b border-carbon-gray-80 flex items-center; }
-  
+
   .faq-section { @apply py-24 px-6 bg-white; }
   .faq-grid { @apply max-w-[1584px] mx-auto space-y-0 border-t border-gray-200 mt-12; }
   .faq-item { @apply py-6 border-b border-gray-200; }
   .faq-q { @apply text-xl font-normal text-carbon-gray-100 mb-2 hover:text-carbon-blue-60 cursor-pointer transition-colors; }
   .faq-a { @apply text-carbon-gray-80 text-base max-w-4xl; }
-  
+
   .cta-section, .page-cta { @apply py-32 px-6 bg-carbon-blue-60 text-white; }
   .cta-inner { @apply max-w-[1584px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center; }
   .cta-title, .page-cta h2 { @apply text-4xl md:text-5xl font-light; }

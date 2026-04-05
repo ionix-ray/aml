@@ -10,7 +10,7 @@ title = "Alashore Marine Exports | Premium Seafood Exporter, India"
 reload_html = true
 watch_path  = ["src", "assets"]
 
-[web.resource]
+[web.resource.dev]
 style   = ["/assets/css/main.css"]
 
 [[web.proxy]]

@@ -2,7 +2,10 @@ use sqlx::{SqlitePool, sqlite::SqlitePoolOptions};
 
 pub async fn init_pool(database_url: &str) -> anyhow::Result<SqlitePool> {
     // Ensure data dir exists for sqlite file path
-    if let Some(path) = database_url.strip_prefix("sqlite://") {
+    let db_path = database_url.strip_prefix("sqlite://")
+        .or_else(|| database_url.strip_prefix("sqlite:"));
+    if let Some(path) = db_path {
+        let path = path.split('?').next().unwrap_or(path);
         if let Some(parent) = std::path::Path::new(path).parent() {
             if !parent.as_os_str().is_empty() {
                 tokio::fs::create_dir_all(parent).await.ok();

@@ -7,7 +7,6 @@ mod seo;
 mod utils;
 
 use dioxus::prelude::*;
-use dioxus_router::prelude::*;
 
 // Re-export page components so the Routable derive macro can find them
 use pages::home::HomePage;

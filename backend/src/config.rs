@@ -17,7 +17,7 @@ impl Config {
                 .and_then(|p| p.parse().ok())
                 .unwrap_or(8046),
             database_url: std::env::var("DATABASE_URL")
-                .unwrap_or_else(|_| "sqlite://data/alashore.db".into()),
+                .unwrap_or_else(|_| "sqlite:data/alashore.db?mode=rwc".into()),
             smtp_host: std::env::var("SMTP_HOST").unwrap_or_default(),
             smtp_user: std::env::var("SMTP_USER").unwrap_or_default(),
             smtp_pass: std::env::var("SMTP_PASS").unwrap_or_default(),

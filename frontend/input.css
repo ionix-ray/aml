@@ -3170,3 +3170,139 @@ html.dark .product-markdown-content td {
 html.dark .product-markdown-content tr:nth-child(even) td {
   background: rgba(184, 212, 232, 0.03);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Premium Product Images — Enterprise-Grade Styling
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Premium image container with theme-aware background */
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 1.5rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+  
+  /* Light theme: Soft gradient background */
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 249, 250, 0.98) 50%,
+    rgba(240, 242, 245, 1) 100%
+  );
+  
+  /* Subtle shadow for depth */
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
+}
+
+/* Hover effect - enhanced zoom with brightness */
+.product-card:hover .product-card-img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.12)) brightness(1.05);
+}
+
+/* Dark theme: Premium dark gradient with enhanced visibility */
+html.dark .product-card-img {
+  background: linear-gradient(135deg,
+    rgba(26, 26, 26, 0.95) 0%,
+    rgba(35, 35, 35, 0.98) 50%,
+    rgba(45, 45, 45, 1) 100%
+  );
+  
+  /* Enhanced shadow and brightness for dark mode visibility */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)) brightness(1.1) contrast(1.05);
+}
+
+html.dark .product-card:hover .product-card-img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6)) brightness(1.15) contrast(1.08);
+}
+
+/* Product card visual container adjustments */
+.product-card-visual {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
+}
+
+html.dark .product-card-visual {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Lazy loading placeholder with premium shimmer effect */
+.product-card-img[loading="lazy"] {
+  background: linear-gradient(
+    90deg,
+    rgba(240, 242, 245, 0.9) 0%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(240, 242, 245, 0.9) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+html.dark .product-card-img[loading="lazy"] {
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 0.9) 0%,
+    rgba(45, 45, 45, 0.95) 50%,
+    rgba(26, 26, 26, 0.9) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive image sizing */
+@media (max-width: 640px) {
+  .product-card-img {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .product-card-img {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .product-card-img {
+    padding: 1.5rem;
+  }
+}
+
+/* High DPI display optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .product-card-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .product-card-img {
+    transition: none;
+  }
+  .product-card:hover .product-card-img {
+    transform: none;
+  }
+  .product-card-img[loading="lazy"] {
+    animation: none;
+  }
+}
+
+/* Print styles: Ensure images print well */
+@media print {
+  .product-card-img {
+    background: white !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+}
+
